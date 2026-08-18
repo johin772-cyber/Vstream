@@ -211,31 +211,240 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // 6. LIVE SEARCH
-    const searchInput = document.getElementById('searchInput');
-    const searchDropdown = document.getElementById('searchResultsDropdown');
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-    const searchToggleMobile = document.getElementById('searchToggleMobile');
-    const searchContainer = document.getElementById('searchContainer');
+   // 6. LIVE SEARCH
+const searchInput = document.getElementById('searchInput');
+const searchDropdown = document.getElementById('searchResultsDropdown');
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+const searchToggleMobile = document.getElementById('searchToggleMobile');
+const searchContainer = document.getElementById('searchContainer');
 
-    if(menuToggle && navMenu) {
-        menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            navMenu.classList.toggle('active');
-            if(searchContainer) searchContainer.classList.remove('active');
+
+// MENU
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+
+        navMenu.classList.toggle('active');
+
+        if (searchContainer) {
+            searchContainer.classList.remove('active');
+        }
+    });
+}
+
+
+// SEARCH MOBILE
+if (searchToggleMobile && searchContainer) {
+    searchToggleMobile.addEventListener('click', function(e) {
+        e.stopPropagation();
+
+        searchContainer.classList.toggle('active');
+
+        if (navMenu) {
+            navMenu.classList.remove('active');
+        }
+
+        if (searchContainer.classList.contains('active') && searchInput) {
+            searchInput.focus();
+        }
+    });
+}
+
+
+// LIVE SEARCH
+if (searchInput && searchDropdown) {
+
+    searchInput.addEventListener('input', function() {
+
+        const query = this.value.trim().toLowerCase();
+
+        searchDropdown.innerHTML = '';
+
+        if (query === '') {
+            searchDropdown.classList.remove('active');
+            return;
+        }
+
+
+        // AMBIL SEMUA FILM
+        const allCards = document.querySelectorAll('.movie-card');
+
+        let matchCount = 0;
+
+
+        allCards.forEach(function(card) {
+
+            // FILM 18+
+            const isAdult =
+                card.getAttribute('data-adult') === 'true';
+
+            if (isAdult && !is18PlusUnlocked) {
+                return;
+            }
+
+
+            // JUDUL
+            const titleElement =
+                card.querySelector('.movie-title');
+
+            const title =
+                card.getAttribute('data-title') ||
+                (titleElement ? titleElement.textContent : '') ||
+                '';
+
+            const titleText =
+                title.toLowerCase();
+
+
+            // GENRE
+            const genre =
+                card.getAttribute('data-genre') || '';
+
+            const genreText =
+                genre.toLowerCase();
+
+
+            // CEK PENCARIAN
+            if (
+                titleText.includes(query) ||
+                genreText.includes(query)
+            ) {
+
+                matchCount++;
+
+
+                // POSTER
+                const posterElement =
+                    card.querySelector(
+                        '.movie-poster, .poster-wrapper img, img'
+                    );
+
+
+                const poster =
+                    posterElement
+                        ? (
+                            posterElement.currentSrc ||
+                            posterElement.src ||
+                            posterElement.getAttribute('src') ||
+                            ''
+                          )
+                        : '';
+
+
+                // BUAT HASIL SEARCH
+                const item = document.createElement('div');
+
+                item.className = 'search-item';
+
+
+                item.innerHTML = `
+                    <img
+                        src="${poster}"
+                        alt="${title}"
+                        onerror="this.style.display='none'"
+                    >
+
+                    <div class="search-item-info">
+
+                        <div class="search-item-title">
+                            ${title}
+                        </div>
+
+                        <div class="search-item-meta">
+                            ${genre}
+                        </div>
+
+                    </div>
+                `;
+
+
+                // KLIK HASIL SEARCH
+                item.addEventListener('click', function() {
+
+                    searchDropdown.classList.remove('active');
+
+                    searchInput.value = '';
+
+
+                    if (
+                        window.innerWidth <= 768 &&
+                        searchContainer
+                    ) {
+                        searchContainer.classList.remove('active');
+                    }
+
+
+                    // BUKA FILM
+                    card.click();
+
+                });
+
+
+                searchDropdown.appendChild(item);
+
+            }
+
         });
+
+
+        // TIDAK ADA HASIL
+        if (matchCount === 0) {
+
+            searchDropdown.innerHTML = `
+                <div class="search-no-match">
+                    Tidak ada film yang cocok.
+                </div>
+            `;
+
+        }
+
+
+        // TAMPILKAN HASIL
+        searchDropdown.classList.add('active');
+
+    });
+
+}
+
+
+// TUTUP SEARCH KETIKA KLIK DI LUAR
+document.addEventListener('click', function(e) {
+
+    if (
+        searchInput &&
+        searchDropdown &&
+        !searchInput.contains(e.target) &&
+        !searchDropdown.contains(e.target)
+    ) {
+        searchDropdown.classList.remove('active');
     }
 
-    if(searchToggleMobile && searchContainer) {
-        searchToggleMobile.addEventListener('click', function(e) {
-            e.stopPropagation();
-            searchContainer.classList.toggle('active');
-            if(navMenu) navMenu.classList.remove('active');
-            if(searchContainer.classList.contains('active')) {
-                searchInput.focus();
-            }
-        });
+
+    // TUTUP MENU
+    if (
+        navMenu &&
+        menuToggle &&
+        !navMenu.contains(e.target) &&
+        !menuToggle.contains(e.target)
+    ) {
+        navMenu.classList.remove('active');
+    }
+
+
+    // TUTUP SEARCH MOBILE
+    if (
+        window.innerWidth <= 768 &&
+        searchContainer &&
+        searchToggleMobile &&
+        !searchContainer.contains(e.target) &&
+        !searchToggleMobile.contains(e.target) &&
+        !searchDropdown.contains(e.target)
+    ) {
+        searchContainer.classList.remove('active');
+    }
+
+});
     }
     });
         if(searchToggleMobile && searchContainer) {
