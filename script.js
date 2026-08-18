@@ -233,7 +233,7 @@ if (menuToggle && navMenu) {
     });
 }
 
-
+        
 // SEARCH MOBILE
 if (searchToggleMobile && searchContainer) {
     searchToggleMobile.addEventListener('click', function(e) {
@@ -251,11 +251,10 @@ if (searchToggleMobile && searchContainer) {
     });
 }
 
-
 // LIVE SEARCH
 if (searchInput && searchDropdown) {
 
-    searchInput.addEventListener('input', function() {
+    searchInput.addEventListener('input', function () {
 
         const query = this.value.trim().toLowerCase();
 
@@ -266,16 +265,12 @@ if (searchInput && searchDropdown) {
             return;
         }
 
-
-        // AMBIL SEMUA FILM
         const allCards = document.querySelectorAll('.movie-card');
 
         let matchCount = 0;
 
+        allCards.forEach(function (card) {
 
-        allCards.forEach(function(card) {
-
-            // FILM 18+
             const isAdult =
                 card.getAttribute('data-adult') === 'true';
 
@@ -283,29 +278,24 @@ if (searchInput && searchDropdown) {
                 return;
             }
 
-
-            // JUDUL
             const titleElement =
                 card.querySelector('.movie-title');
 
             const title =
                 card.getAttribute('data-title') ||
-                (titleElement ? titleElement.textContent : '') ||
-                '';
+                (titleElement
+                    ? titleElement.textContent
+                    : '');
+
+            const genre =
+                card.getAttribute('data-genre') || '';
 
             const titleText =
                 title.toLowerCase();
 
-
-            // GENRE
-            const genre =
-                card.getAttribute('data-genre') || '';
-
             const genreText =
                 genre.toLowerCase();
 
-
-            // CEK PENCARIAN
             if (
                 titleText.includes(query) ||
                 genreText.includes(query)
@@ -313,13 +303,10 @@ if (searchInput && searchDropdown) {
 
                 matchCount++;
 
-
-                // POSTER
                 const posterElement =
                     card.querySelector(
-                        '.movie-poster, .poster-wrapper img, img'
+                        '.movie-poster'
                     );
-
 
                 const poster =
                     posterElement
@@ -328,25 +315,21 @@ if (searchInput && searchDropdown) {
                             posterElement.src ||
                             posterElement.getAttribute('src') ||
                             ''
-                          )
+                        )
                         : '';
 
+                const itemDiv =
+                    document.createElement('div');
 
-                // BUAT HASIL SEARCH
-                const item = document.createElement('div');
+                itemDiv.className = 'search-item';
 
-                item.className = 'search-item';
-
-
-                item.innerHTML = `
+                itemDiv.innerHTML = `
                     <img
                         src="${poster}"
                         alt="${title}"
-                        onerror="this.style.display='none'"
                     >
 
                     <div class="search-item-info">
-
                         <div class="search-item-title">
                             ${title}
                         </div>
@@ -354,41 +337,36 @@ if (searchInput && searchDropdown) {
                         <div class="search-item-meta">
                             ${genre}
                         </div>
-
                     </div>
                 `;
 
+                itemDiv.addEventListener(
+                    'click',
+                    function () {
 
-                // KLIK HASIL SEARCH
-                item.addEventListener('click', function() {
+                        searchDropdown.classList.remove(
+                            'active'
+                        );
 
-                    searchDropdown.classList.remove('active');
+                        searchInput.value = '';
 
-                    searchInput.value = '';
+                        if (
+                            window.innerWidth <= 768 &&
+                            searchContainer
+                        ) {
+                            searchContainer.classList.remove(
+                                'active'
+                            );
+                        }
 
-
-                    if (
-                        window.innerWidth <= 768 &&
-                        searchContainer
-                    ) {
-                        searchContainer.classList.remove('active');
+                        card.click();
                     }
+                );
 
-
-                    // BUKA FILM
-                    card.click();
-
-                });
-
-
-                searchDropdown.appendChild(item);
-
+                searchDropdown.appendChild(itemDiv);
             }
-
         });
 
-
-        // TIDAK ADA HASIL
         if (matchCount === 0) {
 
             searchDropdown.innerHTML = `
@@ -396,20 +374,15 @@ if (searchInput && searchDropdown) {
                     Tidak ada film yang cocok.
                 </div>
             `;
-
         }
 
-
-        // TAMPILKAN HASIL
         searchDropdown.classList.add('active');
-
     });
-
 }
 
 
-// TUTUP SEARCH KETIKA KLIK DI LUAR
-document.addEventListener('click', function(e) {
+// TUTUP SEARCH SAAT KLIK DI LUAR
+document.addEventListener('click', function (e) {
 
     if (
         searchInput &&
@@ -420,115 +393,6 @@ document.addEventListener('click', function(e) {
         searchDropdown.classList.remove('active');
     }
 
-
-    // TUTUP MENU
-    if (
-        navMenu &&
-        menuToggle &&
-        !navMenu.contains(e.target) &&
-        !menuToggle.contains(e.target)
-    ) {
-        navMenu.classList.remove('active');
-    }
-
-
-    // TUTUP SEARCH MOBILE
-    if (
-        window.innerWidth <= 768 &&
-        searchContainer &&
-        searchToggleMobile &&
-        !searchContainer.contains(e.target) &&
-        !searchToggleMobile.contains(e.target) &&
-        !searchDropdown.contains(e.target)
-    ) {
-        searchContainer.classList.remove('active');
-    }
-
 });
-    }
+
     });
-        if(searchToggleMobile && searchContainer) {
-        searchToggleMobile.addEventListener('click', function(e) {
-            e.stopPropagation();
-            searchContainer.classList.toggle('active');
-            if(navMenu) navMenu.classList.remove('active');
-            if(searchContainer.classList.contains('active')) {
-                searchInput.focus();
-            }
-        });
-    }
-
-    searchInput.addEventListener('input', function () {
-        const query = this.value.trim().toLowerCase();
-        searchDropdown.innerHTML = '';
-
-        if (query.length === 0) {
-            searchDropdown.classList.remove('active');
-            return;
-        }
-
-        const allCards = document.querySelectorAll('#genreSectionsContainer .movie-card');
-        let matchCount = 0;
-
-        allCards.forEach(card => {
-            const isAdult = card.getAttribute('data-adult') === 'true';
-            if (isAdult && !is18PlusUnlocked) return; 
-
-const titleText = (card.getAttribute('data-title') || card.querySelector('.movie-title')?.textContent || '').toLowerCase();
-const genreText = (card.getAttribute('data-genre') || '').toLowerCase();
-
-if (titleText.includes(query) || genreText.includes(query)) {
-    matchCount++;
-
-    const poster = card.querySelector('.poster-wrapper img');
-    const imgSrc = poster ? poster.src : '';
-
-    const displayTitle = card.querySelector('.movie-title')?.textContent || 'Tanpa Judul';
-    const displayGenre = card.getAttribute('data-genre') || '';
-
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'search-item';
-                itemDiv.innerHTML = `
-                    <img src="${imgSrc}" alt="${displayTitle}">
-                    <div class="search-item-info">
-                        <div class="search-item-title">${displayTitle}</div>
-                        <div class="search-item-meta">${displayGenre}</div>
-                    </div>
-                `;
-
-                itemDiv.addEventListener('click', function () {
-                    searchDropdown.classList.remove('active');
-                    searchInput.value = '';
-                    if(window.innerWidth <= 768) {
-                        searchContainer.classList.remove('active');
-                    }
-                    card.click();
-                });
-
-                searchDropdown.appendChild(itemDiv);
-            }
-        });
-
-        if (matchCount === 0) {
-            searchDropdown.innerHTML = `<div class="search-no-match">Tidak ada film yang cocok.</div>`;
-        }
-
-        searchDropdown.classList.add('active');
-    });
-
-    document.addEventListener('click', function (e) {
-        if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
-            searchDropdown.classList.remove('active');
-        }
-        if (navMenu && menuToggle) {
-            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                navMenu.classList.remove('active');
-            }
-        }
-        if (window.innerWidth <= 768 && searchContainer && searchToggleMobile) {
-            if (!searchContainer.contains(e.target) && !searchToggleMobile.contains(e.target) && !searchDropdown.contains(e.target)) {
-                searchContainer.classList.remove('active');
-            }
-        }
-    });
-});
