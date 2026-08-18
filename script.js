@@ -265,14 +265,17 @@ document.addEventListener('DOMContentLoaded', function () {
             const isAdult = card.getAttribute('data-adult') === 'true';
             if (isAdult && !is18PlusUnlocked) return; 
 
-            const titleText = (card.getAttribute('data-title') || card.querySelector('.movie-title').textContent).toLowerCase();
-            const genreText = (card.getAttribute('data-genre') || '').toLowerCase();
+const titleText = (card.getAttribute('data-title') || card.querySelector('.movie-title')?.textContent || '').toLowerCase();
+const genreText = (card.getAttribute('data-genre') || '').toLowerCase();
 
-            if (titleText.includes(query) || genreText.includes(query)) {
-                matchCount++;
-                const imgSrc = card.querySelector('.movie-poster').src;
-                const displayTitle = card.querySelector('.movie-title').textContent;
-                const displayGenre = card.getAttribute('data-genre');
+if (titleText.includes(query) || genreText.includes(query)) {
+    matchCount++;
+
+    const poster = card.querySelector('.poster-wrapper img');
+    const imgSrc = poster ? poster.src : '';
+
+    const displayTitle = card.querySelector('.movie-title')?.textContent || 'Tanpa Judul';
+    const displayGenre = card.getAttribute('data-genre') || '';
 
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'search-item';
