@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         genreRow.appendChild(slider);
-        mainContainer.appendChild(genreRow);
+        mainContainer?.appendChild(genreRow);
     }
 
     // 2. LOGIKA KODE RAHASIA (KETUK LOGO 3 KALI)
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const secretPillBtn = document.getElementById('secretPillBtn');
     const bustedOverlay = document.getElementById('bustedOverlay');
     
-    secretLogoTrigger.addEventListener('click', function(e) {
+    secretLogoTrigger?.addEventListener('click', function(e) {
         e.preventDefault(); 
         
         logoClickCount++;
@@ -69,26 +69,24 @@ document.addEventListener('DOMContentLoaded', function () {
             logoClickCount = 0; 
 
             if (is18PlusUnlocked) {
-                bustedOverlay.classList.add('active');
+                bustedOverlay?.classList.add('active');
                 setTimeout(() => {
-                    bustedOverlay.classList.remove('active');
+                    bustedOverlay?.classList.remove('active');
                 }, 2500);
             } else {
                 alert("🔒 Mode Dewasa Dikunci Kembali.");
             }
 
-            secretPillBtn.style.display = is18PlusUnlocked ? 'inline-block' : 'none';
+            secretPillBtn?.style && (secretPillBtn.style.display = is18PlusUnlocked ? 'inline-block' : 'none');
 
             const activePill = document.querySelector('.pill-btn.active');
-            if (!is18PlusUnlocked && activePill.getAttribute('data-filter') === 'Film 18+') {
-                document.querySelector('[data-filter="all"]').click();
+            if (!is18PlusUnlocked && activePill?.getAttribute('data-filter') === 'Film 18+') {
+                document.querySelector('[data-filter="all"]')?.click();
             } else {
-                activePill.click();
+                activePill?.click();
             }
         }
-    });
-
-    // 3. SISTEM FILTER PILL BUTTONS 
+            // 3. SISTEM FILTER PILL BUTTONS 
     const pillBtns = document.querySelectorAll('.pill-btn');
     pillBtns.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -121,10 +119,10 @@ document.addEventListener('DOMContentLoaded', function () {
         cards.forEach(card => {
             card.addEventListener('mouseenter', function () {
                 const ambientColor = this.getAttribute('data-ambient') || 'rgba(235, 49, 90, 0.3)';
-                ambientLayer.style.setProperty('--ambient-color', ambientColor);
+                ambientLayer?.style.setProperty('--ambient-color', ambientColor);
             });
             card.addEventListener('mouseleave', function () {
-                ambientLayer.style.setProperty('--ambient-color', 'rgba(235, 49, 90, 0.25)');
+                ambientLayer?.style.setProperty('--ambient-color', 'rgba(235, 49, 90, 0.25)');
             });
         });
     }
@@ -141,23 +139,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openPlayer(doodUrl, movieTitleStr, movieGenreStr, movieSynopsisStr) {
         if (doodUrl) {
-            doodFrame.src = doodUrl;
-            playerTitle.textContent = movieTitleStr;
-            watchOverlay.classList.add('active');
+            doodFrame && (doodFrame.src = doodUrl);
+            playerTitle && (playerTitle.textContent = movieTitleStr);
+            watchOverlay?.classList.add('active');
             document.body.classList.add('no-scroll');
 
             if (movieSynopsisStr && movieGenreStr !== 'Film 18+') {
-                playerSynopsis.textContent = movieSynopsisStr;
+                playerSynopsis && (playerSynopsis.textContent = movieSynopsisStr);
             } else {
-                playerSynopsis.textContent = ''; 
+                playerSynopsis && (playerSynopsis.textContent = ''); 
             }
 
-            relatedGrid.innerHTML = '';
+            relatedGrid && (relatedGrid.innerHTML = '');
             const allCards = document.querySelectorAll('#genreSectionsContainer .movie-card');
             allCards.forEach(otherCard => {
                 const otherGenre = otherCard.getAttribute('data-genre');
                 const otherAdultStatus = otherCard.getAttribute('data-adult') === 'true';
-                const otherTitle = otherCard.getAttribute('data-title') || otherCard.querySelector('.movie-title').textContent;
+                const otherTitle = otherCard.getAttribute('data-title') || otherCard.querySelector('.movie-title')?.textContent || '';
                 
                 if (otherAdultStatus && !is18PlusUnlocked) return;
 
@@ -165,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const clonedCard = otherCard.cloneNode(true);
                     attachCardClickEvents([clonedCard]);
                     applyAmbientLighting([clonedCard]);
-                    relatedGrid.appendChild(clonedCard);
+                    relatedGrid?.appendChild(clonedCard);
                 }
             });
         }
@@ -175,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cards.forEach(card => {
             card.addEventListener('click', function () {
                 const doodUrl = this.getAttribute('data-dood');
-                const movieTitleStr = this.getAttribute('data-title') || this.querySelector('.movie-title').textContent;
+                const movieTitleStr = this.getAttribute('data-title') || this.querySelector('.movie-title')?.textContent || '';
                 const movieGenreStr = this.getAttribute('data-genre');
                 const movieSynopsisStr = this.getAttribute('data-synopsis') || ''; 
                 
@@ -198,23 +196,23 @@ document.addEventListener('DOMContentLoaded', function () {
     attachCardClickEvents(initialCards);
     applyAmbientLighting(initialCards);
 
-    closePlayerBtn.addEventListener('click', function () {
-        watchOverlay.classList.remove('active');
-        doodFrame.src = '';
+    closePlayerBtn?.addEventListener('click', function () {
+        watchOverlay?.classList.remove('active');
+        doodFrame && (doodFrame.src = '');
         document.body.classList.remove('no-scroll');
     });
 
-    fullScreenBtn.addEventListener('click', function () {
-        if (doodFrame.requestFullscreen) {
+    fullScreenBtn?.addEventListener('click', function () {
+        if (doodFrame?.requestFullscreen) {
             doodFrame.requestFullscreen();
-        } else if (doodFrame.webkitRequestFullscreen) {
+        } else if (doodFrame?.webkitRequestFullscreen) {
             doodFrame.webkitRequestFullscreen();
-        } else if (doodFrame.msRequestFullscreen) {
+        } else if (doodFrame?.msRequestFullscreen) {
             doodFrame.msRequestFullscreen();
         }
     });
-
-    // 6. LIVE SEARCH
+    });
+        // 6. LIVE SEARCH
     const searchInput = document.getElementById('searchInput');
     const searchDropdown = document.getElementById('searchResultsDropdown');
     const menuToggle = document.getElementById('menuToggle');
@@ -222,27 +220,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchToggleMobile = document.getElementById('searchToggleMobile');
     const searchContainer = document.getElementById('searchContainer');
 
-    if(menuToggle && navMenu) {
+    if (menuToggle && navMenu) {
         menuToggle.addEventListener('click', function(e) {
             e.stopPropagation();
             navMenu.classList.toggle('active');
-            if(searchContainer) searchContainer.classList.remove('active');
+            if (searchContainer) searchContainer.classList.remove('active');
         });
     }
 
-    if(searchToggleMobile && searchContainer) {
+    if (searchToggleMobile && searchContainer) {
         searchToggleMobile.addEventListener('click', function(e) {
             e.stopPropagation();
             searchContainer.classList.toggle('active');
-            if(navMenu) navMenu.classList.remove('active');
-            if(searchContainer.classList.contains('active')) {
+            if (navMenu) navMenu.classList.remove('active');
+
+            if (searchContainer.classList.contains('active') && searchInput) {
                 searchInput.focus();
             }
         });
     }
 
-    searchInput.addEventListener('input', function () {
+    searchInput?.addEventListener('input', function () {
         const query = this.value.trim().toLowerCase();
+
+        if (!searchDropdown) return;
+
         searchDropdown.innerHTML = '';
 
         if (query.length === 0) {
@@ -255,19 +257,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
         allCards.forEach(card => {
             const isAdult = card.getAttribute('data-adult') === 'true';
-            if (isAdult && !is18PlusUnlocked) return; 
 
-            const titleText = (card.getAttribute('data-title') || card.querySelector('.movie-title').textContent).toLowerCase();
-            const genreText = (card.getAttribute('data-genre') || '').toLowerCase();
+            if (isAdult && !is18PlusUnlocked) return;
+
+            const titleElement = card.querySelector('.movie-title');
+            const posterElement = card.querySelector('.movie-poster');
+
+            const titleText = (
+                card.getAttribute('data-title') ||
+                titleElement?.textContent ||
+                ''
+            ).toLowerCase();
+
+            const genreText = (
+                card.getAttribute('data-genre') ||
+                ''
+            ).toLowerCase();
 
             if (titleText.includes(query) || genreText.includes(query)) {
                 matchCount++;
-                const imgSrc = card.querySelector('.movie-poster').src;
-                const displayTitle = card.querySelector('.movie-title').textContent;
-                const displayGenre = card.getAttribute('data-genre');
+
+                const imgSrc = posterElement?.src || '';
+                const displayTitle = titleElement?.textContent || '';
+                const displayGenre = card.getAttribute('data-genre') || '';
 
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'search-item';
+
                 itemDiv.innerHTML = `
                     <img src="${imgSrc}" alt="${displayTitle}">
                     <div class="search-item-info">
@@ -277,38 +293,126 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
 
                 itemDiv.addEventListener('click', function () {
+                    const doodUrl = card.getAttribute('data-dood');
+                    const movieTitleStr = card.getAttribute('data-title') || displayTitle;
+                    const movieGenreStr = card.getAttribute('data-genre') || '';
+                    const movieSynopsisStr = card.getAttribute('data-synopsis') || '';
+
+                    openPlayer(
+                        doodUrl,
+                        movieTitleStr,
+                        movieGenreStr,
+                        movieSynopsisStr
+                    );
+
                     searchDropdown.classList.remove('active');
-                    searchInput.value = '';
-                    if(window.innerWidth <= 768) {
-                        searchContainer.classList.remove('active');
+
+                    if (searchInput) {
+                        searchInput.value = '';
                     }
-                    card.click();
                 });
 
                 searchDropdown.appendChild(itemDiv);
             }
         });
 
-        if (matchCount === 0) {
-            searchDropdown.innerHTML = `<div class="search-no-match">Tidak ada film yang cocok.</div>`;
-        }
-
-        searchDropdown.classList.add('active');
-    });
-
-    document.addEventListener('click', function (e) {
-        if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
-            searchDropdown.classList.remove('active');
-        }
-        if (navMenu && menuToggle) {
-            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                navMenu.classList.remove('active');
-            }
-        }
-        if (window.innerWidth <= 768 && searchContainer && searchToggleMobile) {
-            if (!searchContainer.contains(e.target) && !searchToggleMobile.contains(e.target) && !searchDropdown.contains(e.target)) {
-                searchContainer.classList.remove('active');
-            }
+        if (matchCount > 0) {
+            searchDropdown.classList.add('active');
+        } else {
+            searchDropdown.innerHTML = `
+                <div class="search-no-result">
+                    Film tidak ditemukan
+                </div>
+            `;
+            searchDropdown.classList.add('active');
         }
     });
-});
+
+    document.addEventListener('click', function(e) {
+        if (
+            searchContainer &&
+            !searchContainer.contains(e.target)
+        ) {
+            searchDropdown?.classList.remove('active');
+        }
+
+        if (
+            navMenu &&
+            menuToggle &&
+            !navMenu.contains(e.target) &&
+            !menuToggle.contains(e.target)
+        ) {
+            navMenu.classList.remove('active');
+        }
+    });
+
+    // 7. HERO / AMBIENT EFFECT
+    const heroSection = document.querySelector('.hero-section');
+
+    if (heroSection && ambientLayer) {
+        heroSection.addEventListener('mouseenter', function () {
+            const heroAmbient =
+                heroSection.getAttribute('data-ambient') ||
+                'rgba(235, 49, 90, 0.25)';
+
+            ambientLayer.style.setProperty(
+                '--ambient-color',
+                heroAmbient
+            );
+        });
+
+        heroSection.addEventListener('mouseleave', function () {
+            ambientLayer.style.setProperty(
+                '--ambient-color',
+                'rgba(235, 49, 90, 0.25)'
+            );
+        });
+    }
+
+    // 8. TUTUP DROPDOWN SAAT ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            searchDropdown?.classList.remove('active');
+            navMenu?.classList.remove('active');
+
+            if (watchOverlay?.classList.contains('active')) {
+                watchOverlay.classList.remove('active');
+
+                if (doodFrame) {
+                    doodFrame.src = '';
+                }
+
+                document.body.classList.remove('no-scroll');
+            }
+        }
+    });
+
+    // 9. INISIALISASI FILTER
+    const defaultFilter = document.querySelector(
+        '.pill-btn[data-filter="all"]'
+    );
+
+    if (defaultFilter) {
+        defaultFilter.click();
+    }
+
+    // 10. PERLINDUNGAN FILM 18+
+    function refreshAdultVisibility() {
+        const adultRows = document.querySelectorAll(
+            '.genre-row[data-genre-row="Film 18+"]'
+        );
+
+        adultRows.forEach(row => {
+            row.style.display = is18PlusUnlocked ? 'block' : 'none';
+        });
+
+        const adultCards = document.querySelectorAll(
+            '.movie-card[data-adult="true"]'
+        );
+
+        adultCards.forEach(card => {
+            card.style.display = is18PlusUnlocked ? '' : 'none';
+        });
+    }
+
+    refreshAdultVisibility();
