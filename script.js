@@ -86,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 activePill?.click();
             }
         }
+ });
+    
             // 3. SISTEM FILTER PILL BUTTONS 
     const pillBtns = document.querySelectorAll('.pill-btn');
     pillBtns.forEach(btn => {
