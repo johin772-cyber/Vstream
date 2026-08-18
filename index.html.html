@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vstream - Online Streaming Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="bustedOverlay" class="busted-overlay">
+      <div class="busted-content">
+        <h1 class="busted-text">YAHHH KETAUAN 🫣</h1>
+        <p class="busted-sub">Mode Rahasia Diaktifkan!</p>
+      </div>
+    </div>
+    <div id="ambientLayer" class="ambient-layer"></div>
+    <header class="glass-header">
+      <div class="navbar">
+        <div class="logo">
+          <a href="#" id="secretLogoTrigger">
+            <svg class="vstream-logo-svg" viewBox="0 0 230 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="vRedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff2a5f" />
+                  <stop offset="100%" stop-color="#eb315a" />
+                </linearGradient>
+                <filter id="redGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+              <g class="logo-symbol" filter="url(#redGlow)">
+                <path d="M 18 8 L 6 23 L 18 38 L 12 38 L 1 23 L 12 8 Z" fill="url(#vRedGradient)" />
+                <path d="M 16 10 L 25 35 L 34 10 L 28 10 L 23 27 L 19 10 Z" fill="#ffffff" />
+                <rect x="24" y="3" width="4" height="4" fill="url(#vRedGradient)" />
+                <rect x="30" y="6" width="3" height="3" fill="#ffffff" />
+                <rect x="35" y="2" width="2.5" height="2.5" fill="url(#vRedGradient)" opacity="0.8" />
+              </g>
+              <g class="logo-text-group">
+                <text x="44" y="32" font-family="'Poppins', sans-serif" font-weight="900" font-style="italic" font-size="26" fill="url(#vRedGradient)">V</text>
+                <text x="61" y="32" class="stream-text hide-mobile" font-family="'Poppins', sans-serif" font-weight="800" font-style="italic" font-size="24" fill="#ffffff" stroke="#ffffff" stroke-width="0.4" letter-spacing="1.5">STREAM</text>
+              </g>
+            </svg>
+          </a>
+        </div>
+        <div class="search-container" id="searchContainer">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Cari judul / genre film..." autocomplete="off">
+          </div>
+          <div class="search-results-dropdown" id="searchResultsDropdown"></div>
+        </div>
+        <div class="nav-right">
+          <ul class="nav-menu" id="navMenu">
+            <li>
+              <a href="#" class="active">Beranda</a>
+            </li>
+            <li>
+              <a href="#">Film</a>
+            </li>
+            <li>
+              <a href="#">TV Series</a>
+            </li>
+          </ul>
+          <button class="search-toggle-mobile" id="searchToggleMobile" aria-label="Cari">🔍</button>
+          <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </button>
+          <button class="btn-login">Masuk</button>
+        </div>
+      </div>
+    </header>
+    <section class="hero-spotlight">
+      <div class="hero-backdrop">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnsGF8kgHJHcvtBU1RL5jdoIqAkEv9MQIoJF6u-pKJyfrx2kxIgct1-xRsy8g33IinljHYUVncfRwcpGBmZA2xDTgziKT_5mdFZuBatlpn8CI7qQ070JnpVTdlzUQDKLNEo1HYY4AtpycIi78i6_JTy9yQ1V5ATYie4YdEXcThSc9VILhsxlxrbenNhI84/s1600/Spider-Man_Brand_New_Day_Tall_Poster.webp" alt="Backdrop Film">
+        <div class="hero-gradient-overlay"></div>
+      </div>
+      <div class="container hero-content-wrapper">
+        <div class="hero-details">
+          <div class="hero-badges">
+            <span class="badge-trend">🔥 #1 Trending Minggu Ini</span>
+            <span class="badge-quality">4K Ultra HD</span>
+            <span class="badge-rating">★ 8.0</span>
+          </div>
+          <h1 class="hero-title">Spiderman New Brand 2026</h1>
+          <div class="hero-meta">
+            <span>2026</span>
+            <span class="dot"></span>
+            <span>Action / Sci-Fi</span>
+            <span class="dot"></span>
+            <span>2j 15m</span>
+          </div>
+          <p class="hero-synopsis">
+            Babak baru petualangan Peter Parker dalam menghadapi tantangan yang menguji batas kekuatan dan keberaniannya di kota New York yang penuh intrik.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-play" id="heroPlayBtn" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Spiderman New Brand 2026">
+              ▶ Nonton Sekarang
+            </button>
+            <button class="btn-watchlist">+ Tambah ke Daftar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="container category-pills-section">
+      <div class="pills-wrapper" id="pillsContainer">
+        <button class="pill-btn active" data-filter="all">✨ Semua Genre</button>
+        <button class="pill-btn" data-filter="Film Horror">👻 Film Horror</button>
+        <button class="pill-btn" data-filter="Film Action">💥 Film Action</button>
+        <button class="pill-btn" data-filter="Drama Korea">🎭 Drama Korea</button>
+        <button class="pill-btn" data-filter="Anime Series">🎌 Anime Series</button>
+        <button class="pill-btn adult-pill" id="secretPillBtn" data-filter="Film 18+" style="display: none;">🔞 Film 18+</button>
+      </div>
+    </section>
+    <main class="container section" id="movies">
+      <div id="genreSectionsContainer"></div>
+    </main>
+    <div id="rawMovieData" style="display: none;">
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(235, 49, 90, 0.45)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="Teenage Sex and Death at Camp Miasma (2026)" data-synopsis="Sekelompok remaja yang berniat menghabiskan waktu liburan bersenang-senang di Camp Miasma harus berjuang bertahan hidup ketika liburan mereka berubah menjadi mimpi buruk akibat teror mematikan yang mengintai.">
+        <div class="poster-wrapper">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgq5P-adGaVBEBPVB87_EUErg9KYrAVvifo9oybZmaZ_uLihvc_0d4lhx9ehG-zZ9ryKNnw8_8bEViPDPZoDirWxfgyy-zgMA0-hlU9PVzJ9_u66YHtXUcWOHBwxOD5LjyWGUWeaAsd5EaH9ioWZ4YlZcathAIj1GL62hozQ2Be1pkvv4jyBOeiFDWW7TcC/s576/IMG_20260813_200920.jpg" alt="Camp Miasma" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.8</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Teenage Sex and Death at Camp Miasma (2026)</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(142, 68, 173, 0.45)" data-dood="https://player.abyssplayer.com/6bAmL8rcr" data-title="Colony (2026)" data-synopsis="Kisah menegangkan tentang perjuangan bertahan hidup sekelompok orang di sebuah koloni yang terisolasi. Mereka perlahan menyadari bahwa ada ancaman misterius dan mengerikan yang bersembunyi di sekitar mereka.">
+        <div class="poster-wrapper">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7W2aza-gQj7cft6nsGDuGJw_IVQ5jNNmURxAdu0NtqGNfCoc5hVWjlSP1JBgqtzQ10g_a2UaceCiUDy-l4yY6FG9_kc40sukSnCcOZx8Oemvrzt215g1r0PA1UrEzNvYtqaZW4XYaygLR-2FRnGF79F3nsJbB41-lz0XxgmKsRVPJpIA9yNbgIa4Mb8cC/s1600/MV5BNzI5YWViNGUtNGRiMy00OThhLWIwOGUtZjkyZDk2NjliODY2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Colony" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.1</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Colony (2026)</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(180, 20, 40, 0.5)" data-dood="https://player.abyssplayer.com/hy9CVD9tE" data-title="Deep Water 2026" data-synopsis="Ed dan Lorraine Warren kembali menangani kasus pengusiran setan tersulit dalam karier mereka yang mengancam keselamatan keluarga mereka sendiri.">
+        <div class="poster-wrapper">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTRTNMDTm60pVDasKoX1FFF4HSEg-p1-AppGZe2nFZeQw_kpi_-_OuHDQgmn8qaDTL_r3oYbsxYi6kNBTIOA3-uaKsXwqpv_PjdTcOmcFamNZsVJWEK0c5dEtREkastWYssN46PtA0J3gAI74dZ8dorqKCsJKJZsGiPn1_xB5tuhyvzYXbuQCyJ8PmylE/s1600/1000028249.jpg" alt="Horror 1" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.4</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Deep Water 2026</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(100, 0, 0, 0.5)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="Evil Dead Rise 2" data-synopsis="Buku Necronomicon membangkitkan entitas jahat di sebuah gedung pencakar langit modern yang mengunci seluruh penghuninya.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80" alt="Horror 2" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.9</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Evil Dead Rise 2</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(70, 20, 90, 0.5)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="Smile 2" data-synopsis="Kutukan kutukan senyuman mematikan menyebar ke kehidupan seorang bintang pop terkenal di tengah konsirnya.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=400&q=80" alt="Horror 3" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.6</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Smile 2</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(30, 30, 30, 0.6)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="A Quiet Place: Day One" data-synopsis="Menyaksikan awal mula invasi makhluk asing dengan pendengaran super yang menghancurkan peradaban manusia di New York.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=400&q=80" alt="Horror 4" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.2</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">A Quiet Place: Day One</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(120, 30, 30, 0.5)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="Insidious: The Red Door 2" data-synopsis="Keluarga Lambert harus memasuki kegelapan The Further sekali lagi untuk menutup selamanya pintu rahasia iblis.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=400&q=80" alt="Horror 5" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.4</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Insidious: The Red Door 2</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(150, 40, 20, 0.5)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="Scream VII" data-synopsis="Ghostface baru muncul di sebuah kota kecil, meneror para penyintas masa lalu dengan aturan film horor baru.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=400&q=80" alt="Horror 6" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.7</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Scream VII</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(50, 80, 50, 0.5)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="The Exorcist: Believer II" data-synopsis="Dua gadis terpapar oleh kekuatan kuno yang membutuhkan gabungan ritual kuno dari berbagai kepercayaan untuk diselamatkan.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1509281373149-e957c6296406?auto=format&fit=crop&w=400&q=80" alt="Horror 7" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.1</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">The Exorcist: Believer II</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(100, 20, 80, 0.5)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="Hereditary Legacy" data-synopsis="Generasi baru keluarga Graham menemukan sekte kuno rahasia nenek moyang mereka yang menuntut pengorbanan darah.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1499209974431-9dac3ada00d7?auto=format&fit=crop&w=400&q=80" alt="Horror 8" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.5</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Hereditary Legacy</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(200, 50, 0, 0.5)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="Talk to Me Part 2" data-synopsis="Tangan balsem terkutuk yang tersisa jatuh ke tangan sekelompok remaja lain dan membuka portal neraka tanpa batas.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80" alt="Horror 9" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.9</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Talk to Me Part 2</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Horror" data-ambient="rgba(40, 40, 80, 0.5)" data-dood="https://player.abyssplayer.com/jUT9vpP3c" data-title="The Nun III" data-synopsis="Iblis Valak kembali menampakkan wujudnya di sebuah biara tua di Eropa Tengah yang menyimpan relic rahasia gereja.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=400&q=80" alt="Horror 10" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.5</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">The Nun III</h3>
+          <div class="movie-meta">
+            <span>Film Horror</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(41, 128, 185, 0.45)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Spiderman New Brand 2026" data-synopsis="Babak baru petualangan Peter Parker dalam menghadapi tantangan yang menguji batas kekuatan dan keberaniannya di kota New York yang penuh dengan intrik serta ancaman musuh baru.">
+        <div class="poster-wrapper">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnsGF8kgHJHcvtBU1RL5jdoIqAkEv9MQIoJF6u-pKJyfrx2kxIgct1-xRsy8g33IinljHYUVncfRwcpGBmZA2xDTgziKT_5mdFZuBatlpn8CI7qQ070JnpVTdlzUQDKLNEo1HYY4AtpycIi78i6_JTy9yQ1V5ATYie4YdEXcThSc9VILhsxlxrbenNhI84/s1600/Spider-Man_Brand_New_Day_Tall_Poster.webp" alt="Spiderman 2026" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.0</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Spiderman New Brand 2026</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(200, 100, 0, 0.5)" data-dood="https://player.abyssplayer.com/-l8XSW6Aj" data-title="Lucky Strike 2026" data-synopsis="John Wick kembali dari persembunyiannya untuk menghadapi jajaran petinggi High Table dalam pertarungan hidup mati terakhir.">
+        <div class="poster-wrapper">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4p6BkpKCpvG6dxa9YJyRkb4kfcj5t41eP7w0wYFUk79WuBjiWA3i0oJ90AeBo8sm0wwvM5qojiEmZkXTpQCM432yVhPi3m_k10qF_QD_7u6HO3jy526spfkpEfrAO2wRojw6UXPjqIO0H9FELtzNcrsw7Jc93SQj6Ejds3ka657_BSrThuCdslAIsPKI/s1600/1000028340.jpg" alt="Action 1" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.8</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Lucky Strike 2026</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(0, 120, 200, 0.5)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Mission: Impossible - Dead Reckoning 2" data-synopsis="Ethan Hunt dan tim IMF berlomba melawan waktu untuk memusnahkan kecerdasan buatan berbahaya 'The Entity'.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1519074069444-1ba4e6988891?auto=format&fit=crop&w=400&q=80" alt="Action 2" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.6</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Mission: Impossible 8</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(220, 50, 50, 0.5)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Deadpool & Wolverine 2" data-synopsis="Duo tentara bayaran dan mutant paling kacau kembali menyusuri multiverse untuk misi penyelamatan yang penuh komedi dan laga brutal.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=400&q=80" alt="Action 3" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.7</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Deadpool & Wolverine 2</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(50, 150, 100, 0.5)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Gladiator II" data-synopsis="Lucius tumbuh dewasa dan memasuki Koloseum Roma untuk membalas dendam serta mengembalikan kejayaan kekaisaran.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1461696114087-397271a7aedc?auto=format&fit=crop&w=400&q=80" alt="Action 4" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.3</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Gladiator II</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(150, 0, 150, 0.5)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="The Batman Part II" data-synopsis="Bruce Wayne mengusut konspirasi yang lebih dalam di jantung kota Gotham saat ancaman penjahat misterius baru muncul.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=400&q=80" alt="Action 5" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.5</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">The Batman Part II</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(255, 140, 0, 0.5)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Fast X: Part 2" data-synopsis="Dom Toretto dan keluarganya menghadapi ancaman balas dendam terakhir dari Dante Reyes yang ingin menghancurkan segalanya.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=400&q=80" alt="Action 6" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.5</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Fast X: Part 2</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(0, 150, 255, 0.5)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Avatar: Fire and Ash" data-synopsis="Jake Sully dan Neytiri berhadapan dengan suku Na'vi baru yang agresif dan menggunakan elemen api di kawasan berbahaya Pandora.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80" alt="Action 7" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.9</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Avatar: Fire and Ash</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(180, 50, 50, 0.5)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Extraction 3" data-synopsis="Tyler Rake menjalani misi penyelamatan rahasia di penjara dengan keamanan maksimum di tengah zona perang terbuka.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=400&q=80" alt="Action 8" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.1</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Extraction 3</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(100, 100, 200, 0.5)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Top Gun 3" data-synopsis="Maverick melatih generasi pilot jet tempur generasi terbaru untuk misi udara stealth yang dianggap mustahil.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1519074069444-1ba4e6988891?auto=format&fit=crop&w=400&q=80" alt="Action 9" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.4</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Top Gun 3</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film Action" data-ambient="rgba(200, 200, 0, 0.5)" data-dood="https://player.abyssplayer.com/N7MfgH2jV" data-title="Transformers: One" data-synopsis="Asal-usul hubungan persahabatan antara Optimus Prime dan Megatron sebelum berubah menjadi musuh bebuyutan di Cybertron.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=400&q=80" alt="Action 10" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.9</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Transformers: One</h3>
+          <div class="movie-meta">
+            <span>Film Action</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(232, 67, 147, 0.45)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Queen of Tears Season 2" data-synopsis="Melanjutkan babak baru dari kisah pernikahan keluarga konglomerat, Baek Hyun-woo dan Hong Hae-in kembali dihadapkan pada ujian cinta, intrik bisnis, dan krisis tak terduga yang menantang keutuhan hubungan mereka.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=400&q=80" alt="Drama Korea" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 9.1</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Queen of Tears Season 2</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(255, 105, 180, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Squid Game Season 3" data-synopsis="Gi-hun kembali memasuki permainan mematikan dengan tujuan menghancurkan organisasi rahasia dari dalam.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=400&q=80" alt="Drakor 1" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 9.0</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Squid Game Season 3</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(230, 100, 150, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Lovely Runner Special" data-synopsis="Kisah perjalanan waktu Im Sol demi menyelamatkan idola favoritnya Sun-jae dengan akhir cerita bahagia baru.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Drakor 2" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.9</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Lovely Runner Special</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(180, 100, 200, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="All of Us Are Dead Season 2" data-synopsis="Para penyintas SMA Hyosan yang tersisa berjuang menghadapi varian setengah zombie baru di kota Seoul.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=400&q=80" alt="Drakor 3" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.5</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">All of Us Are Dead S2</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(255, 180, 100, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Crash Landing on You 2" data-synopsis="Ri Jeong-hyeok dan Yoon Se-ri mencari cara untuk hidup bersama selamanya di tanah netral Swiss.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=400&q=80" alt="Drakor 4" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 9.3</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Crash Landing on You 2</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(100, 150, 255, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Vincenzo Season 2" data-synopsis="Vincenzo Cassano kembali ke Korea untuk membalas dendam pada kartel kejahatan finansial internasional.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Drakor 5" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.8</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Vincenzo Season 2</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(200, 100, 100, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Sweet Home Season 3" data-synopsis="Pertarungan akhir antara manusia, monster, dan neohuman untuk menentukan masa depan bumi.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80" alt="Drakor 6" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.0</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Sweet Home Season 3</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(150, 220, 150, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Hospital Playlist S3" data-synopsis="Kisah persahabatan 5 dokter spesialis di Rumah Sakit Yulje dalam menghadapi suka duka pasien dan romansa.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Drakor 7" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 9.2</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Hospital Playlist S3</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(220, 150, 200, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Goblin: The Return" data-synopsis="Sang Goblin kembali ke dunia fana untuk memenuhi janji cinta sejati dengan pengantinnya yang bereinkarnasi.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=400&q=80" alt="Drakor 8" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 9.4</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Goblin: The Return</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(255, 200, 150, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Business Proposal 2" data-synopsis="Kang Tae-moo dan Shin Ha-ri mempersiapkan pernikahan mereka yang dipenuhi rintangan kocak persetujuan keluarga.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=400&q=80" alt="Drakor 9" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.6</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Business Proposal 2</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Drama Korea" data-ambient="rgba(100, 200, 220, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Taxi Driver Season 3" data-synopsis="Tim Rainbow Taxi kembali bertindak menegakkan keadilan bagi mereka yang dizalimi oleh hukum.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Drakor 10" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.9</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Taxi Driver Season 3</h3>
+          <div class="movie-meta">
+            <span>Drama Korea</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(255, 118, 117, 0.45)" data-dood="https://player.abyssplayer.com/6X734Vvls" data-title="naruto shippuden the movie: blood prison 2011" data-synopsis="Mengikuti perjalanan Naruto Uzumaki yang kini tumbuh lebih dewasa dan kuat. Ia bertekad untuk membawa kembali sahabatnya, Sasuke, serta melindungi desa Konoha dari ancaman peperangan besar yang didalangi oleh organisasi jahat, Akatsuki.">
+        <div class="poster-wrapper">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiuS_3cxFOojBIwo2WZjs47GB4qRHazGjtHg8Nb0bycZh4ayazjEOdgjyEgtwzucpQzRDiYD_K7gyhyTvgjCe7l-A8Anq0x1o9lu9O10Ae7l-MfpAoCwjI0M4CfZeplYdfW9p1GXhysnxAc1nq9CewKbditlKJnW5s_uwAK_xGAStlq6eJUxZoeCdu9jnY/s1600/1000028408.jpg" alt="Anime" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 9.5</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">naruto shippuden the movie: blood prison 2011</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(255, 60, 0, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Demon Slayer: Infinity Castle" data-synopsis="Tanjiro dan Korps Pembasmi Iblis memasuki Kastil Tanpa Batas untuk mengalahkan Muzan Kibutsuji.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=400&q=80" alt="Anime 1" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 9.6</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Demon Slayer: Infinity Castle</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(0, 150, 200, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Jujutsu Kaisen Season 3" data-synopsis="Permainan Pemusnahan (Culling Game) dimulai dengan Yuji Itadori terperangkap dalam pertempuran antar penyihir.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80" alt="Anime 2" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 9.2</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Jujutsu Kaisen S3</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(220, 0, 0, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Attack on Titan: The Final Chapters" data-synopsis="Pertarungan puncak keputusan Mikasa dan Armin untuk menghentikan Guncangan Bumi (Rumbling) buatan Eren.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=400&q=80" alt="Anime 3" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 9.7</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Attack on Titan Final</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(255, 180, 0, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="One Piece: Elbaf Arc" data-synopsis="Luffy dan Bajak Laut Topi Jerami akhirnya mendarat di tanah para raksasa, Elbaf, yang menyimpan rahasia abad kekosongan.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=400&q=80" alt="Anime 4" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 9.4</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">One Piece: Elbaf Arc</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(100, 100, 255, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Solo Leveling Season 2" data-synopsis="Sung Jinwoo membangkitkan tentara bayangan yang lebih kuat dan menghadapi ancaman para Monarch.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80" alt="Anime 5" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 9.1</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Solo Leveling Season 2</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(0, 200, 150, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Bleach: Thousand-Year Blood War Part 3" data-synopsis="Ichigo Kurosaki menuju Istana Raja Roh untuk menghadapi Yhwach dalam perang terakhir antara Shinigami dan Quincy.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=400&q=80" alt="Anime 6" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 9.0</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Bleach: TYBW Part 3</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(255, 100, 200, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Spy x Family Season 3" data-synopsis="Keluarga Forger terus menyembunyikan identitas rahasia mereka sambil menyelesaikan misi perdamaian dunia.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=400&q=80" alt="Anime 7" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.7</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Spy x Family Season 3</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(0, 180, 255, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="My Hero Academia Season 7" data-synopsis="Pertarungan puncak antara pahlawan tersisa dengan All For One dan Shigaraki Tomura.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80" alt="Anime 8" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.8</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">My Hero Academia S7</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(200, 50, 255, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Chainsaw Man Season 2" data-synopsis="Denji bertemu dengan Reze dan terlibat dalam konflik berdarah dengan Bomb Devil.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=400&q=80" alt="Anime 9" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.9</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Chainsaw Man Season 2</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Anime Series" data-ambient="rgba(100, 255, 100, 0.5)" data-dood="https://playmogo.com/e/osixb9bd1n4w" data-title="Blue Lock Season 2" data-synopsis="U-20 Japan vs Blue Lock Eleven: pertandingan penentuan masa depan sepak bola Jepang.">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=400&q=80" alt="Anime 10" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.6</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Blue Lock Season 2</h3>
+          <div class="movie-meta">
+            <span>Anime Series</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 0, 0.6)" data-dood="#" data-title="Fifty Shades of Secret (2026)">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518621736915-f3b8c41bfd00?auto=format&fit=crop&w=400&q=80" alt="Film 18" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 8.5</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Fifty Shades of Secret (2026)</h3>
+          <div class="movie-meta">
+            <span>Romance / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 0, 0.6)" data-dood="#" data-title="Midnight Passion (2026)">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" alt="Film 18" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 7.9</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Midnight Passion (2026)</h3>
+          <div class="movie-meta">
+            <span>Thriller / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="365 Days: Last Chapter">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518621736915-f3b8c41bfd00?auto=format&fit=crop&w=400&q=80" alt="18+ 1" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 7.8</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">365 Days: Last Chapter</h3>
+          <div class="movie-meta">
+            <span>Romance / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="Wild Orchid Redux">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" alt="18+ 2" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.4</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Wild Orchid Redux</h3>
+          <div class="movie-meta">
+            <span>Drama / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="Basic Instinct 3">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518621736915-f3b8c41bfd00?auto=format&fit=crop&w=400&q=80" alt="18+ 3" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.1</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Basic Instinct 3</h3>
+          <div class="movie-meta">
+            <span>Thriller / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="Erotic Stories 2026">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" alt="18+ 4" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.2</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Erotic Stories 2026</h3>
+          <div class="movie-meta">
+            <span>Romance / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="Desire & Betrayal">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518621736915-f3b8c41bfd00?auto=format&fit=crop&w=400&q=80" alt="18+ 5" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.6</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Desire & Betrayal</h3>
+          <div class="movie-meta">
+            <span>Drama / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="Velvet Nights">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" alt="18+ 6" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.0</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Velvet Nights</h3>
+          <div class="movie-meta">
+            <span>Romance / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="Dangerous Obsession">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518621736915-f3b8c41bfd00?auto=format&fit=crop&w=400&q=80" alt="18+ 7" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.5</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Dangerous Obsession</h3>
+          <div class="movie-meta">
+            <span>Thriller / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="Secret Affairs">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" alt="18+ 8" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.7</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Secret Affairs</h3>
+          <div class="movie-meta">
+            <span>Drama / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="Seduction Games">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1518621736915-f3b8c41bfd00?auto=format&fit=crop&w=400&q=80" alt="18+ 9" class="movie-poster">
+          <span class="badge-quality">4K</span>
+          <span class="badge-rating">★ 8.2</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Seduction Games</h3>
+          <div class="movie-meta">
+            <span>Romance / 18+</span>
+          </div>
+        </div>
+      </div>
+      <div class="movie-card" data-genre="Film 18+" data-adult="true" data-ambient="rgba(255, 0, 60, 0.6)" data-dood="#" data-title="Forbidden Encounters">
+        <div class="poster-wrapper">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" alt="18+ 10" class="movie-poster">
+          <span class="badge-quality">HD</span>
+          <span class="badge-rating">★ 7.3</span>
+          <div class="play-icon"></div>
+        </div>
+        <div class="movie-info">
+          <h3 class="movie-title">Forbidden Encounters</h3>
+          <div class="movie-meta">
+            <span>Romance / 18+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="watch-overlay" id="watchOverlay">
+      <div class="player-top-bar">
+        <button class="back-btn" id="closePlayerBtn">&#8592; Kembali</button>
+        <div class="playing-title" id="playerTitle">Memutar Film...</div>
+        <div class="player-spacer"></div>
+      </div>
+      <div class="player-container">
+        <div class="video-wrapper">
+          <iframe id="doodFrame" src="" allowfullscreen scrolling="no"></iframe>
+        </div>
+        <div class="player-bottom-bar">
+          <div class="player-synopsis" id="playerSynopsis"></div>
+          <div class="player-controls-right">
+            <button class="btn-watchlist" id="fullScreenBtn">📺 Fullscreen</button>
+          </div>
+        </div>
+        <div class="related-movies-section">
+          <h3 class="related-title" id="relatedSectionTitle">Rekomendasi Film Sejenis</h3>
+          <div class="related-grid" id="relatedMoviesGrid"></div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="container">
+        <div class="footer-links">
+          <a href="#">Tentang Kami</a>
+          <a href="#">Syarat & Ketentuan</a>
+          <a href="#">Kebijakan Privasi</a>
+          <a href="#">Bantuan</a>
+        </div>
+        <p class="copyright">&copy; 2026 Vstream. Seluruh Hak Cipta Dilindungi Undang-Undang.</p>
+      </div>
+    </footer>
+    
+    <script src="script.js"></script>
+  </body>
+</html>
